@@ -63,31 +63,19 @@ By synthesizing this research, the **StudySphere** team established a clear miss
 
 ## Installation and Setup
 
-> **Note**: StudySphere’s prototype can be tailored as a **web application** or a **mobile application**, depending on institutional needs. Adjust steps according to your chosen framework (e.g., React, Flutter, etc.).
+> **Note**: StudySphere’s prototype can be tailored as a **mobile application**.
 
 1. **Clone the Repository & Install Dependencies**
 
-    git clone https://github.com/YourOrg/StudySphere.git  
+    git clone https://github.com/jaffarkeikei/StudySphere.git  
     cd StudySphere  
 
-    # For a Node.js-based web app:
-    npm install
-
-    # For a Flutter-based mobile app:
     flutter pub get
 
 2. **Configure Environment Variables**  
    - Create a `.env` file (or the relevant configuration file) to store any API keys or server URLs.  
-   - Example variables:
-
-        REACT_APP_MAPS_API_KEY=YOUR_MAPS_API_KEY
-        REACT_APP_BACKEND_URL=https://your-backend.example.com
 
 3. **Run the Application**  
-   - For a web app:
-
-        npm start
-
    - For a mobile app (Flutter):
 
         flutter run
@@ -236,3 +224,14 @@ We welcome contributions from students, educators, and developers. To contribute
 **StudySphere** is distributed under the [MIT License](https://opensource.org/licenses/MIT). You are free to use, modify, and distribute this software, provided that you retain the original license and copyright notices.
 
 ---
+## Acknowledgments
+
+Special thanks to the following people for their research and support:
+
+- Jack Wiebe
+- Jayden Chiola-Nakai
+- Jaffar Keikei
+- Klara Meng
+- Luna Zayed
+- Sophia de Uria
+- Suhyeon Yoo (For feedback)
