@@ -16,6 +16,7 @@ Welcome to **StudySphere**—an innovative application designed to help universi
 8. [Future Enhancements](#future-enhancements)  
 9. [Contributing](#contributing)  
 10. [License](#license)
+11. [Acknowledgments](#acknowledgments)
 
 ---
 
@@ -235,3 +236,4 @@ Special thanks to the following people for their research and support:
 - Luna Zayed
 - Sophia de Uria
 - Suhyeon Yoo (For feedback)
+---
