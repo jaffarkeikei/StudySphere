@@ -185,7 +185,7 @@ StudySphere follows a modern, scalable architecture designed for mobile-first im
 |  CLIENT DEVICES  |      |      MOBILE UI    |      |    CLIENT-SIDE    |      |   LOCAL STORAGE    |
 |                  |      |                   |      |      LOGIC        |      |                    |
 |  +------------+  |      |  +-----------+    |      |  +------------+   |      |  +-------------+   |
-|  | iOS Device |<--------->| Flutter UI |<---------->| State Mgmt. |<--------->| Offline Cache |   |
+|  | iOS Device |<--------->| Flutter UI |<---------->| State Mgmt. |<--------->|  |Offline Cache|   |
 |  +------------+  |      |  +-----------+    |      |  | (Provider) |   |      |  +-------------+   |
 |                  |      |                   |      |  +------------+   |      |                    |
 |  +------------+  |      |  +-----------+    |      |                   |      |                    |
@@ -242,8 +242,8 @@ StudySphere follows a modern, scalable architecture designed for mobile-first im
                           |                             DATA SOURCES                                    |
                           |                                                                            |
                           |  +------------------+  +-------------------+  +----------------------+     |
-                          |  |   IoT Sensors    |  |  User Check-ins   |  | Historical Analytics |     |
-                          |  | (WiFi counting)  |  |                   |  |        Data          |     |
+                          |  |  WiFi counting   |  |  User Check-ins   |  | Historical Analytics |     |
+                          |  |                  |  |                   |  |        Data          |     |
                           |  +------------------+  +-------------------+  +----------------------+     |
                           +----------------------------------------------------------------------------+
 
