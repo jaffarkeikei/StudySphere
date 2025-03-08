@@ -1,6 +1,6 @@
 # StudySphere: Empowering Students to Discover the Perfect Study Spot
 
-Welcome to **StudySphere**—an innovative application designed to help university students easily discover, evaluate, and select their ideal study spaces. By consolidating location details (e.g., capacity, availability, hours of operation, and more) into a single interactive platform, **StudySphere** addresses a critical student need: reducing time spent searching for study spots and maximizing time spent actually studying.
+Welcome to **StudySphere**—an innovative mobile application designed to help university students easily discover, evaluate, and select their ideal study spaces. By consolidating location details (e.g., capacity, availability, hours of operation, and more) into a single interactive platform, **StudySphere** addresses a critical student need: reducing time spent searching for study spots and maximizing time spent actually studying.
 
 ---
 
@@ -53,7 +53,7 @@ By synthesizing this research, the **StudySphere** team established a clear miss
    - Quick-glance metrics: noise level, table size, availability of power outlets, presence of natural light, and more.
 
 5. **Map and List Views**  
-   - **Map View** pinpoints each study spot’s location, aiding quick navigation.  
+   - **Map View** pinpoints each study spot's location, aiding quick navigation.  
    - **List View** offers a sortable directory of spaces by distance, rating, or capacity.
 
 6. **Reservation System (Proposed)**  
@@ -64,24 +64,59 @@ By synthesizing this research, the **StudySphere** team established a clear miss
 
 ## Installation and Setup
 
-> **Note**: StudySphere’s prototype can be tailored as a **mobile application**.
+> **Note**: StudySphere is a cross-platform mobile application built with Flutter.
 
-1. **Clone the Repository & Install Dependencies**
+1. **Prerequisites**
+   - Flutter SDK (version 3.0+)
+   - Dart (version 2.17+)
+   - Android Studio / Xcode for emulators
+   - Firebase project setup
+   - Node.js (version 14+) for backend
 
+2. **Clone the Repository & Install Dependencies**
+
+    ```bash
     git clone https://github.com/jaffarkeikei/StudySphere.git  
     cd StudySphere  
-
     flutter pub get
+    ```
 
-2. **Configure Environment Variables**  
-   - Create a `.env` file (or the relevant configuration file) to store any API keys or server URLs.  
+3. **Configure Environment Variables**  
+   - Create a `.env` file in the project root
+   - Add the following keys:
+     ```
+     API_BASE_URL=your_backend_url
+     GOOGLE_MAPS_API_KEY=your_maps_api_key
+     FIREBASE_PROJECT_ID=your_firebase_project_id
+     ```
+   - For the backend, create a separate `.env` file with database credentials
 
-3. **Run the Application**  
-   - For a mobile app (Flutter):
+4. **Firebase Setup**
+   - Download your `google-services.json` (Android) and `GoogleService-Info.plist` (iOS)
+   - Place these files in the appropriate directories:
+     - Android: `android/app/`
+     - iOS: `ios/Runner/`
 
-        flutter run
+5. **Run the Application**  
+   - Start the emulator or connect a physical device
+   - Run the app:
 
-   - The application should now be accessible locally or on a connected device/emulator.
+     ```bash
+     flutter run
+     ```
+
+   - For backend development:
+     ```bash
+     cd backend
+     npm install
+     npm run dev
+     ```
+
+6. **Build for Production**
+   ```bash
+   flutter build apk --release  # Android
+   flutter build ios --release  # iOS
+   ```
 
 ---
 
@@ -91,7 +126,7 @@ By synthesizing this research, the **StudySphere** team established a clear miss
    - Users can create accounts using their university email or social logins.
 
 2. **Set Your Preferences**  
-   - Choose how far you’re willing to walk or commute, your noise-level tolerance, preference for group vs. individual seating, etc.  
+   - Choose how far you're willing to walk or commute, your noise-level tolerance, preference for group vs. individual seating, etc.  
    - The app saves these preferences for future recommendations.
 
 3. **Browse Study Spots**  
@@ -99,7 +134,7 @@ By synthesizing this research, the **StudySphere** team established a clear miss
    - Sort results by rating, distance, or capacity.
 
 4. **Filter & Refine**  
-   - Apply dynamic filters (e.g., *“Must have power outlets,”* *“Open 24 hours,”* *“Has a café nearby”*).
+   - Apply dynamic filters (e.g., *"Must have power outlets,"* *"Open 24 hours,"* *"Has a café nearby"*).
 
 5. **Check Real-Time Status**  
    - Quickly see if a spot is near capacity.  
@@ -137,30 +172,75 @@ Below is a simplified flowchart of how a typical user might interact with **Stud
 
 ## Technical Architecture
 
-> *This section provides a high-level overview; actual architecture may vary based on your tech stack.*
+StudySphere follows a modern, scalable architecture designed for mobile-first implementation with robust backend services. The architecture prioritizes performance, security, and real-time data synchronization.
 
-1. **Front-End**  
-   - Built using modern frameworks like React for web or Flutter for mobile.  
-   - Communicates with the back-end via RESTful or GraphQL APIs.
+### Architecture Diagram
 
-2. **Back-End**  
-   - Developed using Node.js/Express or Django to manage user accounts, study spot data, and real-time seat availability.  
-   - Uses databases (e.g., PostgreSQL) to store user preferences, location information, and reviews.
+![StudySphere Architecture Diagram](docs/images/architecture_diagram.png)
 
-3. **Real-Time Occupancy Tracking**  
-   - Could incorporate IoT sensors in physical locations or rely on crowd-sourced check-ins.  
-   - A dedicated microservice aggregates and estimates current occupancy levels.
+*Note: Create the diagram using tools like draw.io, Lucidchart, or Figma and save it to the docs/images directory.*
 
-4. **Third-Party Integrations**  
-   - Mapping APIs (e.g., Google Maps, Mapbox) for location services.  
-   - Social login integrations for simplified user authentication.  
-   - Notification services (e.g., Firebase Cloud Messaging) for real-time alerts on seat availability.
+### Core Components
+
+1. **Mobile Application (Frontend)**
+   - **Framework**: Flutter for cross-platform development (iOS & Android)
+   - **State Management**: Provider/Bloc pattern
+   - **UI Components**: Material Design & Custom Widgets
+   - **Local Storage**: Hive/SQLite for offline caching
+   - **Maps Integration**: Google Maps API for location services
+   - **Authentication**: Firebase Authentication with social login options
+
+2. **Backend Services**
+   - **API Layer**: REST API built with Node.js/Express
+   - **Database**: 
+     - MongoDB for user profiles, study spot metadata, and reviews
+     - Redis for caching and real-time occupancy data
+   - **Authentication**: JWT-based authentication with role-based access control
+   - **Cloud Functions**: Firebase Cloud Functions for serverless operations
+
+3. **Real-Time Occupancy System**
+   - **Websockets**: Socket.io for real-time updates
+   - **Data Collection**:
+     - IoT sensors in participating locations (WiFi connection counting)
+     - User check-ins and manual reporting
+     - Predictive algorithms for estimating occupancy based on historical data
+
+4. **External Integrations**
+   - Google Maps Platform (Geolocation, Places API)
+   - University SSO systems for academic verification
+   - Push notification services (Firebase Cloud Messaging)
+   - Payment processing for premium features (Stripe)
+
+### Data Flow
+
+1. User authentication and profile data flow through secure Firebase Authentication
+2. Study spot queries are processed by the backend API and returned to the mobile app
+3. Real-time occupancy updates are pushed via WebSockets to connected clients
+4. User interactions (reviews, favorites) are stored in MongoDB with Redis caching
+5. Analytics data is collected through Firebase Analytics for application improvement
+
+### Security Measures
+
+- End-to-end encryption for all data in transit
+- Secure data storage with encryption at rest
+- Rate limiting to prevent API abuse
+- Input validation and sanitization to prevent injection attacks
+- Regular security audits and penetration testing
+
+### Deployment Strategy
+
+- **Mobile App**: Continuous delivery through App Store and Google Play
+- **Backend**: Containerized deployment with Docker on cloud platforms (AWS/GCP)
+- **Database**: Managed database services with automated backups
+- **CI/CD**: GitHub Actions for automated testing and deployment
+
+This architecture ensures StudySphere can scale from a university-specific deployment to a multi-campus platform while maintaining performance and reliability.
 
 ---
 
 ## Data Collection & Insights
 
-**StudySphere**’s development is driven by real user research. Key findings include:
+**StudySphere**'s development is driven by real user research. Key findings include:
 
 - **Questionnaire Findings**  
   - Among 31 participants, over **77%** prefer on-campus libraries while **90%** rely on friend recommendations due to a lack of centralized information.  
